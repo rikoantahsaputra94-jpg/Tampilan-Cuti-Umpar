@@ -215,13 +215,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const search = document.getElementById("search");
   let allData = [];
 
-  const fmt = v => v ? new Date(v).toLocaleDateString("id-ID") : "-";
-
   async function load(){
-    const { data } = await client
+    const { data, error } = await client
       .from("pengajuan_cuti")
       .select("nama,status")
       .order("created_at",{ascending:false});
+
+    if(error){
+      console.error(error);
+      return;
+    }
 
     allData = data || [];
     render(allData);
@@ -229,26 +232,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function render(arr){
     list.innerHTML="";
-    if(arr.length===0){empty.style.display="block";return}
+    if(arr.length===0){
+      empty.style.display="block";
+      return;
+    }
     empty.style.display="none";
 
-arr.forEach(d=>{
-  list.insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <div class="row">
-        <span class="label">Nama</span>
-        <span class="value">${d.nama || "-"}</span>
-      </div>
+    arr.forEach(d=>{
+      list.insertAdjacentHTML("beforeend",`
+        <div class="card">
+          <div class="row">
+            <span class="label">Nama</span>
+            <span class="value">${d.nama || "-"}</span>
+          </div>
+          <span class="status ${d.status || "DIAJUKAN"}">
+            ${d.status || "Menunggu Verifikasi"}
+          </span>
+        </div>
+      `);
+    });
+  }
 
-      <span class="status ${d.status || "DIAJUKAN"}">
-        ${d.status || "Menunggu Verifikasi"}
-      </span>
-    </div>
-  `);
-});
-
-  search.addEventListener("input",e=>{
-    const v=e.target.value.toLowerCase();
+  search.addEventListener("input", e=>{
+    const v = e.target.value.toLowerCase();
     render(allData.filter(x=>(x.nama||"").toLowerCase().includes(v)));
   });
 
