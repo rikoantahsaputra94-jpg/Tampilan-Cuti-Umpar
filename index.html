@@ -5,269 +5,155 @@
 <title>Pengajuan Cuti</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family:system-ui,Segoe UI;
-  background:linear-gradient(180deg,#e0f2fe,#f8fafc);
+  background:linear-gradient(180deg,#eef2ff,#f8fafc);
+  color:#1e293b;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER GOV STYLE ===== */
 .header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:#ffffffee;
-  backdrop-filter:blur(10px);
-  display:flex;
-  align-items:center;
-  padding:12px 14px;
-  box-shadow:0 6px 14px rgba(0,0,0,.08);
-}
-.back{
-  text-decoration:none;
-  font-size:18px;
-  font-weight:800;
-  color:#1e40af;
-}
-.header-title{
-  flex:1;
   text-align:center;
+  padding:22px 16px 18px;
+  background:linear-gradient(135deg,#1e3a8a,#1e40af);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.header h1{
+  margin:0;
+  font-size:20px;
   font-weight:900;
-  font-size:18px;
-  color:#1e3a8a;
-  margin-right:24px;
+  letter-spacing:.5px;
+}
+.header p{
+  margin-top:6px;
+  font-size:13px;
+  opacity:.9;
 }
 
 /* ===== CONTAINER ===== */
 .container{
   max-width:480px;
   margin:auto;
-  padding:14px;
+  padding:20px 16px;
 }
 
-/* ===== BUTTON AREA ===== */
+/* ===== BUTTON GOV MODERN ===== */
 .action-box{
   display:grid;
-  gap:12px;
-  margin:10px 0 16px;
+  gap:16px;
+  margin-top:10px;
 }
+
 .action-box a{
   text-decoration:none;
-  padding:16px;
-  border-radius:18px;
-  text-align:center;
-  font-weight:800;
-  font-size:15px;
-  box-shadow:0 10px 22px rgba(0,0,0,.14);
-  transition:.2s;
-}
-.action-box a:active{transform:scale(.97)}
-.btn-ajukan{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff}
-.btn-contoh{background:linear-gradient(135deg,#059669,#047857);color:#fff}
-.btn-download{background:linear-gradient(135deg,#f59e0b,#d97706);color:#1f2937}
-
-/* ===== SEARCH ===== */
-.search{
-  width:100%;
-  padding:15px 18px;
-  border-radius:20px;
-  border:none;
-  font-size:15px;
-  box-shadow:0 8px 20px rgba(0,0,0,.12);
-  margin-bottom:16px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:#fff;
-  border-radius:22px;
   padding:18px;
-  margin-bottom:18px;
-  box-shadow:0 14px 28px rgba(0,0,0,.15);
-}
-.row{
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:6px;
-  font-size:14px;
-}
-.label{color:#64748b}
-.value{
-  font-weight:800;
-  text-align:right;
-  color:#0f172a;
-}
-.status{
-  display:inline-block;
-  margin-top:14px;
-  padding:8px 20px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:900;
-}
-.DIAJUKAN{background:#fde68a;color:#92400e}
-
-/* ===== EMPTY ===== */
-.empty{
+  border-radius:20px;
   text-align:center;
-  color:#64748b;
-  margin-top:40px;
+  font-weight:800;
+  font-size:15px;
+  box-shadow:0 12px 28px rgba(0,0,0,.12);
+  transition:.2s ease;
+  display:block;
 }
 
-/* ===== INFO ACCORDION ===== */
-.info{
-  background:#fff;
-  border-radius:22px;
-  margin:22px 0;
-  box-shadow:0 12px 24px rgba(0,0,0,.12);
+.action-box a:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 30px rgba(0,0,0,.18);
 }
-.info-header{
-  padding:16px 18px;
-  font-weight:900;
-  color:#1e40af;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  cursor:pointer;
+
+.btn-ajukan{
+  background:linear-gradient(135deg,#2563eb,#1e3a8a);
+  color:#fff;
 }
-.info-body{
-  display:none;
-  padding:0 18px 18px;
-  font-size:14px;
-  line-height:1.65;
-  color:#334155;
+
+.btn-contoh{
+  background:#ffffff;
+  color:#1e3a8a;
+  border:2px solid #1e3a8a;
 }
-.info-body h4{
-  margin:14px 0 6px;
+
+.btn-download{
+  background:#f1f5f9;
   color:#0f172a;
 }
 
+/* ===== INFO BOX ===== */
+.info{
+  background:#ffffff;
+  border-radius:22px;
+  margin-top:28px;
+  padding:18px;
+  box-shadow:0 12px 24px rgba(0,0,0,.1);
+}
+
+.info h3{
+  margin-top:0;
+  font-size:16px;
+  color:#1e3a8a;
+}
+
+.info ul{
+  padding-left:18px;
+  font-size:14px;
+  line-height:1.6;
+  margin:8px 0 0;
+}
+
+/* ===== FOOTER ===== */
 .footer{
   text-align:center;
-  color:#94a3b8;
+  margin:30px 0 10px;
   font-size:12px;
-  margin:12px 0 6px;
+  color:#94a3b8;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
-  <a class="back" href="https://rikoantah.github.io/Web-Utama-UMPAR/">←</a>
-  <div class="header-title">Pengajuan Cuti</div>
+  <h1>PENGAJUAN CUTI</h1>
+  <p>Rumah Sakit Umum Daerah</p>
 </div>
 
 <div class="container">
 
-  <!-- ACTION BUTTON -->
   <div class="action-box">
-    <a class="btn-ajukan" href="https://rikoantahsaputra94-jpg.github.io/Pengajuan-Cuti-rsds/" target="_blank">➕ Ajukan Cuti</a>
-    <a class="btn-contoh" href="https://drive.google.com/file/d/12nb8h1-7qXpQQ9T5ps5dwT6Wfhm9t_zx/view" target="_blank">📄 Contoh Pengisian Formulir</a>
-    <a class="btn-download" href="https://drive.google.com/drive/folders/1nlARa3NYZFuFnkgja1r6IJTxseyu3cs0" target="_blank">⬇️ Download Formulir</a>
+    <a class="btn-ajukan" href="https://rikoantahsaputra94-jpg.github.io/Pengajuan-Cuti-rsds/" target="_blank">
+      ➕ Ajukan Cuti
+    </a>
+
+    <a class="btn-contoh" href="https://drive.google.com/file/d/12nb8h1-7qXpQQ9T5ps5dwT6Wfhm9t_zx/view" target="_blank">
+      📄 Contoh Pengisian Formulir
+    </a>
+
+    <a class="btn-download" href="https://drive.google.com/drive/folders/1nlARa3NYZFuFnkgja1r6IJTxseyu3cs0" target="_blank">
+      ⬇️ Download Formulir
+    </a>
   </div>
 
-  <input id="search" class="search" placeholder="🔍 Cari nama pegawai…">
-
-  <div id="list"></div>
-  <div id="empty" class="empty" style="display:none">Tidak ada data</div>
-
-  <!-- INFO -->
   <div class="info">
-    <div class="info-header" onclick="toggleInfo()">
-      ℹ️ Informasi Tambahan
-      <span id="icon">+</span>
-    </div>
-    <div class="info-body" id="infoBody">
-      <h4>Cuti Tahunan</h4>12 hari kerja per tahun, minimal kerja 1 tahun.
-      <h4>Cuti Besar</h4>3 bulan setelah 5 tahun bekerja.
-      <h4>Cuti Sakit</h4>Sesuai rekomendasi dokter.
-      <h4>Cuti Melahirkan</h4>3 bulan penuh.
-      <h4>Cuti Alasan Penting</h4>Maksimal 2 bulan.
-      <h4>CLTN</h4>Maksimal 3 tahun tanpa penghasilan.
-      <h4>Cuti Umroh</h4>Termasuk cuti besar, disetujui PPK.
-    </div>
+    <h3>Informasi Jenis Cuti</h3>
+    <ul>
+      <li><b>Cuti Tahunan</b> – 12 hari kerja per tahun</li>
+      <li><b>Cuti Besar</b> – 3 bulan setelah 5 tahun bekerja</li>
+      <li><b>Cuti Sakit</b> – Sesuai rekomendasi dokter</li>
+      <li><b>Cuti Melahirkan</b> – 3 bulan penuh</li>
+      <li><b>Cuti Alasan Penting</b> – Maksimal 2 bulan</li>
+      <li><b>CLTN</b> – Maksimal 3 tahun tanpa penghasilan</li>
+      <li><b>Cuti Umroh</b> – Termasuk cuti besar (disetujui PPK)</li>
+    </ul>
   </div>
 
-  <div class="footer">Data terbaru tampil di atas</div>
+  <div class="footer">
+    Sistem Layanan Kepegawaian Digital
+  </div>
+
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
-  if(!window.supabase){
-    alert("Supabase JS gagal dimuat");
-    return;
-  }
-
-  const client = window.supabase.createClient(
-    "https://ufiqibxdgwlysqhinqbz.supabase.co",
-    "sb_publishable_EVSVWnsUriOPA_O3RnGTpg_Zmd4pyAL"
-  );
-
-  const list = document.getElementById("list");
-  const empty = document.getElementById("empty");
-  const search = document.getElementById("search");
-  let allData = [];
-
-  async function load(){
-    const { data, error } = await client
-      .from("pengajuan_cuti")
-      .select("nama,status")
-      .order("created_at",{ascending:false});
-
-    if(error){
-      console.error(error);
-      return;
-    }
-
-    allData = data || [];
-    render(allData);
-  }
-
-  function render(arr){
-    list.innerHTML="";
-    if(arr.length===0){
-      empty.style.display="block";
-      return;
-    }
-    empty.style.display="none";
-
-    arr.forEach(d=>{
-      list.insertAdjacentHTML("beforeend",`
-        <div class="card">
-          <div class="row">
-            <span class="label">Nama</span>
-            <span class="value">${d.nama || "-"}</span>
-          </div>
-          <span class="status ${d.status || "DIAJUKAN"}">
-            ${d.status || "Menunggu Verifikasi"}
-          </span>
-        </div>
-      `);
-    });
-  }
-
-  search.addEventListener("input", e=>{
-    const v = e.target.value.toLowerCase();
-    render(allData.filter(x=>(x.nama||"").toLowerCase().includes(v)));
-  });
-
-  load();
-});
-
-function toggleInfo(){
-  const b=document.getElementById("infoBody");
-  const i=document.getElementById("icon");
-  const s=b.style.display==="block";
-  b.style.display=s?"none":"block";
-  i.textContent=s?"+":"−";
-}
-</script>
 </body>
 </html>
